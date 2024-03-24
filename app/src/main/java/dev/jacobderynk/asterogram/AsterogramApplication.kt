@@ -3,7 +3,7 @@ package dev.jacobderynk.asterogram
 import android.app.Application
 import dev.jacobderynk.asterogram.di.networkingModule
 import dev.jacobderynk.asterogram.di.repositoryModule
-//import dev.jacobderynk.asterogram.di.viewModelModule
+import dev.jacobderynk.asterogram.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -31,7 +31,7 @@ class AsterogramApplication : Application() {
             modules(
                 networkingModule,
                 repositoryModule,
-                //viewModelModule
+                viewModelModule
             )
         }
     }
