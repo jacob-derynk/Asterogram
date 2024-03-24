@@ -42,7 +42,7 @@ val networkingModule = module {
     }
 
     val moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
+        .addLast(KotlinJsonAdapterFactory())
         .build()
 
     fun getRetrofit(): Retrofit {
@@ -53,9 +53,11 @@ val networkingModule = module {
             .build()
     }
 
-    fun provideApi(retrofit: Retrofit): MeteoriteLandingsService = retrofit.create(MeteoriteLandingsService::class.java)
+    fun provideApi(retrofit: Retrofit): MeteoriteLandingsService =
+        retrofit.create(MeteoriteLandingsService::class.java)
 
     single {
         provideApi(getRetrofit())
     }
 }
+   
