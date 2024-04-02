@@ -4,7 +4,7 @@ package dev.jacobderynk.asterogram.di
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dev.jacobderynk.asterogram.BuildConfig
-import dev.jacobderynk.asterogram.network.MeteoriteLandingsService
+import dev.jacobderynk.asterogram.data.network.MeteoriteLandingsService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

@@ -1,4 +1,26 @@
 <resources>
     <string name="app_name">Asterogram</string>
     <string name="home_route">Home</string>
+    <string name="welcome_title">👋 Hello there</string>
+    <string name="welcome_description">Welcome to Asterogram. An Instagram but for Asteroids. I will walk you through the app in a bit. Are you ready? Liftoff. 🚀</string>
+    <string name="username_title">How should we call you, astronaut? 👨‍🚀</string>
+    <string name="username_description">If you want, you can set up an username. It will look cooler when you check out your profile later. Or leave it blank and decide later in the profile settings, I will think of some cool name for you.</string>
+    <string name="like_title">Scroll. Like. You know the drill… 📱</string>
+    <string name="like_description">Scroll through (in)finite feed of asteroids that are downloaded from NASA (thx btw). You like that rock? 🪨 Like it to show\'em some love.</string>
+    <string name="save_title">💾 saving all the cat memes?</string>
+    <string name="save_description">We don\'t have cats here in space 😿. But your fav rocks 🤘 can be saved and then accessed through your profile even on the deepest space journeys without internet connection.</string>
+    <string name="skip_onboarding">Skip</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="finish_onboarding">Finish</string>
+    <string name="username">Username</string>
+    <string name="profile">Profile</string>
+    <string name="posts">Posts</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="change_username">Change username</string>
+    <string name="save">Save</string>
+    <string name="choose_new_username">Choose a new username</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="username_saved">Usernam sucesfully changed</string>
 </resources>

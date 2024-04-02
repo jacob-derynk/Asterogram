@@ -1,8 +1,13 @@
 package dev.jacobderynk.asterogram
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
+import dev.jacobderynk.asterogram.di.daoModule
 import dev.jacobderynk.asterogram.di.networkingModule
 import dev.jacobderynk.asterogram.di.repositoryModule
+import dev.jacobderynk.asterogram.di.dataStoreModule
+import dev.jacobderynk.asterogram.di.databaseModule
 import dev.jacobderynk.asterogram.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -21,19 +26,27 @@ class AsterogramApplication : Application() {
             plant(Timber.DebugTree())
         }
 
-        Timber.i("Application onCreate")
-
         // Plant also release tree here if you wanna implement Crashlytics
 
         startKoin {
+            appContext = this@AsterogramApplication
             androidLogger(Level.ERROR)
             androidContext(this@AsterogramApplication)
             modules(
                 networkingModule,
                 repositoryModule,
-                viewModelModule
+                viewModelModule,
+                dataStoreModule,
+                databaseModule,
+                daoModule,
             )
         }
+    }
+
+    companion object {
+        @SuppressLint("StaticFieldLeak")
+        lateinit var appContext: Context
+            private set
     }
 
 }
