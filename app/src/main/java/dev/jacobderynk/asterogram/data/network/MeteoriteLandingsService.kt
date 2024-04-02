@@ -1,6 +1,6 @@
-package dev.jacobderynk.asterogram.network
+package dev.jacobderynk.asterogram.data.network
 
-import dev.jacobderynk.asterogram.network.model.AsteroidResponse
+import dev.jacobderynk.asterogram.data.network.response.AsteroidResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

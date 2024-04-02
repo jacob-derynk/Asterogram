@@ -1,8 +1,8 @@
 package dev.jacobderynk.asterogram.data.repository
 
 import dev.jacobderynk.asterogram.data.model.CommunicationResult
-import dev.jacobderynk.asterogram.network.MeteoriteLandingsService
-import dev.jacobderynk.asterogram.network.model.AsteroidResponse
+import dev.jacobderynk.asterogram.data.network.MeteoriteLandingsService
+import dev.jacobderynk.asterogram.data.network.response.AsteroidResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

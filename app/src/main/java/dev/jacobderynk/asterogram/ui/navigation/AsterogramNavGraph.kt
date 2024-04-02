@@ -1,5 +1,9 @@
 package dev.jacobderynk.asterogram.ui.navigation
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
@@ -19,17 +23,23 @@ fun AsterogramNavGraph(
     NavHost(
         navController = navController,
         startDestination = startDestination,
-        modifier = modifier
+        modifier = modifier,
+        enterTransition = { fadeIn(tween(300)) },
+        exitTransition = { fadeOut(tween(300)) },
+        popEnterTransition = { fadeIn(tween(300)) },
+        popExitTransition = { fadeOut(tween(300)) }
+
     ) {
         composable(
-            route = AsterogramNavigation.HomeRoute.route
+            route = AsterogramNavigation.HomeRoute.route,
         ) {
             HomeScreen()
         }
         composable(
-            route = AsterogramNavigation.ProfileRoute.route
+            route = AsterogramNavigation.ProfileRoute.route,
         ) {
             ProfileScreen()
         }
     }
+
 }

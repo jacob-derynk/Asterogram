@@ -1,8 +1,7 @@
-package dev.jacobderynk.asterogram.network.model
+package dev.jacobderynk.asterogram.data.network.response
 
 import com.squareup.moshi.Json
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerialName
 
 
 @Serializable
