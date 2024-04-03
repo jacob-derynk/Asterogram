@@ -25,11 +25,20 @@ fun HomeScreen(
     viewModel: HomeViewModel = koinViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
     val pullRefreshState = rememberPullRefreshState(uiState.isLoading, { viewModel.fetchAsteroids() })
 
     Box(Modifier.pullRefresh(pullRefreshState)) {
         LazyColumn(Modifier.fillMaxSize()) {
+
+            if (uiState.error != null) {
+                item {
+                    HomeErrorDialog(
+                        error = uiState.error!!,
+                        onTryAgain = { viewModel.fetchAsteroids() },
+                        onDismiss = { viewModel.resetErrorState() },
+                    )
+                }
+            }
 
             items(
                 items = uiState.list,

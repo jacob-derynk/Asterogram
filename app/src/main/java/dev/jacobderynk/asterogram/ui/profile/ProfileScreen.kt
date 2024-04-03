@@ -32,7 +32,7 @@ fun ProfileScreen(
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    var showBottomSheet by remember { mutableStateOf(false) }
+    var showDialog by remember { mutableStateOf(false) }
 
     if (uiState.isLoading) {
         Box {
@@ -48,9 +48,9 @@ fun ProfileScreen(
         viewModel.resetUsernameSaved()
     }
 
-    if (showBottomSheet) {
-        ChangeUsernameModal(
-            onDismiss = { showBottomSheet = false },
+    if (showDialog) {
+        ChangeUsernameDialog(
+            onDismiss = { showDialog = false },
             onUsernameChange = viewModel::saveUsername
         )
     }
@@ -60,13 +60,13 @@ fun ProfileScreen(
         profileName = uiState.username,
         postsNumber = uiState.list.size.toString(),
         onEditUsernameClick = {
-            showBottomSheet = true
+            showDialog = true
         }
     )
 }
 
 @Composable
-fun ChangeUsernameModal(
+fun ChangeUsernameDialog(
     onUsernameChange: (String) -> Unit,
     onDismiss: () -> Unit,
 ) {

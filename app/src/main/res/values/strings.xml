@@ -22,5 +22,11 @@
     <string name="save">Save</string>
     <string name="choose_new_username">Choose a new username</string>
     <string name="dismiss">Dismiss</string>
-    <string name="username_saved">Usernam sucesfully changed</string>
+    <string name="username_saved">Username successfully changed</string>
+    <string name="network_error">Network error</string>
+    <string name="fetching_error">Error getting posts</string>
+    <string name="generic_error">Error</string>
+    <string name="network_error_content">There has been a connection error. Please chech your internet.</string>
+    <string name="generic_error_content">There has been an issue downloading posts. Please try again.</string>
+    <string name="try_again">Try again</string>
 </resources>

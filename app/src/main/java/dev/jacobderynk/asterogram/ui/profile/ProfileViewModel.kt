@@ -29,7 +29,7 @@ class ProfileViewModel(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
 
-            delay(500) // pretend to fetch stuff
+            delay(1000) // pretend to fetch stuff
 
             localRepository.getSavedAsteroids().collect { list ->
                 _uiState.update { it.copy(isLoading = false, list = list) }
