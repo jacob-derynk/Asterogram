@@ -14,6 +14,7 @@ data class AsteroidEntity(
     val mass: String,
     val fall: String,
     val year: String,
+    val `class`: String,
     val likes: Int,
     val isSaved: Boolean = false,
     val lat: String,

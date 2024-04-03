@@ -23,11 +23,14 @@ import java.net.NoRouteToHostException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
+private const val ITEMS_PER_PAGE = 10
 
 class HomeViewModel(
     private val remoteRepository: AsteroidRemoteRepositoryImpl,
     private val localRepository: AsteroidLocalRepositoryImpl,
 ) : ViewModel() {
+
+    private var currentOffset = 0
 
     private val _uiState = MutableStateFlow(HomeUiState(list = emptyList()))
     val uiState: StateFlow<HomeUiState> = _uiState
@@ -45,16 +48,17 @@ class HomeViewModel(
                 _uiState.update { it.copy(isLoading = true) }
 
                 val result = withContext(Dispatchers.IO) {
-                    remoteRepository.getAsteroids(5, 0)
+                    remoteRepository.getAsteroids(ITEMS_PER_PAGE, currentOffset)
                 }
 
                 when (result) {
                     is CommunicationResult.Success -> {
                         Timber.d("✅ Got asteroids")
+                        currentOffset += result.data.size
                         _uiState.update { state ->
                             state.copy(
                                 isLoading = false,
-                                list = result.data.map { it.toDbModel() },
+                                list = state.list + result.data.map { it.toDbModel() },
                             )
                         }
                     }
@@ -100,7 +104,7 @@ class HomeViewModel(
                         _uiState.update {
                             it.copy(
                                 isLoading = false,
-                                error = HomeErrorState.GenericError(exception)
+                                error = HomeErrorState.ConnectionError(exception)
                             )
                         }
                     }

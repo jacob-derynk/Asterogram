@@ -51,6 +51,7 @@ import dev.jacobderynk.asterogram.data.model.AsteroidEntity
 import dev.jacobderynk.asterogram.ui.home.PostCard
 import dev.jacobderynk.asterogram.ui.theme.AsterogramTheme
 import dev.jacobderynk.asterogram.ui.theme.Typography
+import dev.jacobderynk.asterogram.utils.NumbersFormatter
 import java.nio.ByteBuffer
 
 sealed class ProfileScreenTabs(@DrawableRes val icon: Int) {
@@ -137,6 +138,9 @@ fun ProfileScreenContent(
                             svgString = it.svg ?: "",
                             name = it.name,
                             year = it.year,
+                            `class` = it.`class`,
+                            mass = NumbersFormatter.formatMass(it.mass),
+                            fall = it.fall
                         )
                     }
                 }
@@ -240,5 +244,6 @@ private fun ProfileHeaderPreview() {
     ProfileHeader(
         profileName = "Lorem Ipsum Name",
         postsNumber = "14",
-    ) {}
+        onEditUsernameClick = {},
+    )
 }
