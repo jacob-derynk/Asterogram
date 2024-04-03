@@ -4,7 +4,6 @@ import dev.jacobderynk.asterogram.data.database.AsteroidDao
 import dev.jacobderynk.asterogram.data.model.AsteroidEntity
 import dev.jacobderynk.asterogram.data.network.response.AsteroidResponse
 import kotlinx.coroutines.flow.Flow
-import timber.log.Timber
 
 class AsteroidLocalRepositoryImpl(
     private val asteroidDao: AsteroidDao,
