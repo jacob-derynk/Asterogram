@@ -41,7 +41,7 @@ import coil.size.Size
 import dev.jacobderynk.asterogram.R
 import dev.jacobderynk.asterogram.ui.theme.Typography
 import dev.jacobderynk.asterogram.utils.DateTimeManager
-import dev.jacobderynk.asterogram.utils.LikesFormatter
+import dev.jacobderynk.asterogram.utils.NumbersFormatter
 import java.nio.ByteBuffer
 import kotlin.random.Random
 
@@ -52,6 +52,9 @@ fun PostCard(
     svgString: String,
     name: String,
     year: String,
+    `class`: String,
+    mass: String,
+    fall: String,
 ) {
     val userColor = remember {
         Color(Random.nextFloat(), Random.nextFloat(), Random.nextFloat(), 1f)
@@ -99,7 +102,7 @@ fun PostCard(
             )
         }
 
-        BottomSection(bookmarked, onBookmarkClick, name, year)
+        BottomSection(bookmarked, onBookmarkClick, name, year, `class`, mass, fall)
     }
 
 }
@@ -110,12 +113,15 @@ private fun BottomSection(
     onBookmarkClick: () -> Unit,
     name: String,
     year: String,
+    `class`: String,
+    mass: String,
+    fall: String
 ){
     val context = LocalContext.current
     var liked by rememberSaveable { mutableStateOf(false) }
     val postLikes by rememberSaveable {
         mutableStateOf(
-            LikesFormatter.formatLikeCount(LikesFormatter.generateRandomLikes())
+            NumbersFormatter.formatLikeCount(NumbersFormatter.generateRandomLikes())
         )
     }
 
@@ -201,10 +207,26 @@ private fun BottomSection(
             .padding(4.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(text = postLikes, fontWeight = FontWeight.SemiBold)
             Text(text = name, fontWeight = FontWeight.SemiBold)
+            CreatePostDescription(name, DateTimeManager.getYearFromResponseDatetime(year), `class`, mass, fall)
             Text(text = DateTimeManager.formatResponseDatetime(year), style = Typography.labelMedium, color = Color.Gray)
         }
 
     }
+}
+
+@Composable
+private fun CreatePostDescription(name: String, year: String, `class`: String, mass: String, fall: String) {
+    val descriptions = listOf(
+        "They say what goes up must come down, but for $name, it took quite a while! This $`class` class space rock finally made its grand entrance in ${year}. Weighing in at ${mass}g, it's proof that even the universe can't resist making a splash. #MeteoriteMagic #${fall}IntoMyLife",
+        "Introducing $name, the latest member of the 'I Survived Space' club. After a journey of who-knows-how-many light-years, this ${mass}g $`class` class superstar decided to $fall on Earth in ${year}. Guess it couldn't resist checking out what all the buzz was about! #SpaceRockStar #Year${year}",
+        "Ever heard of interstellar delivery? Well, $name took it seriously and arrived Earth-side in $year, making quite the entrance. This $`class` VIP weighs ${mass}g and chose to $fall rather than call ahead. Talk about a surprise visit! #CosmicCrashLanding #GuessWhos${fall}",
+        "Looks like $name couldn't resist joining the party all the way from the cosmos, landing in ${year}! This $mass g piece of $`class` didn't just fall; it made an entrance. Earth's gravity? More like Earth's invitation. Welcome to the rock collection! #StellarArrival #Rocking${year}",
+        "New shipment alert: $name just dropped in from the asteroid belt, class $`class` and weighing ${mass}g. Landed in ${year}, and let me tell you, this rock knows how to make an entrance. Fall or found? Doesn't matter when you're this fabulous. #SpaceRockChic #${fall}Fashion",
+        "Breaking News: $name, a ${mass}g $`class` meteorite, decided Earth was the place to be in ${year}. Whether it fell or was found, one thing's for sure: it's not just another pebble. It's a souvenir from space, no passport needed! #CrashLandingCouture #EarthBound${fall}",
+    )
+    val description by rememberSaveable { mutableStateOf(descriptions.random()) }
+
+    Text(description)
 }
 
 @Preview(showBackground = true)
@@ -215,6 +237,9 @@ private fun PostCardPreview() {
         onBookmarkClick = {},
         svgString = "",
         name = "Lorem Ipsum Name",
-        year = "1999-01-01T00:00:00.000"
+        year = "1999-01-01T00:00:00.000",
+        `class` = "Iron",
+        mass = "120",
+        fall = "1969"
     )
 }

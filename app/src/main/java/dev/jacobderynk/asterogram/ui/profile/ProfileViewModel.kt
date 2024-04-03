@@ -1,12 +1,12 @@
 package dev.jacobderynk.asterogram.ui.profile
 
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.jacobderynk.asterogram.data.datastore.DatastoreRepositoryImpl
 import dev.jacobderynk.asterogram.data.model.AsteroidEntity
 import dev.jacobderynk.asterogram.data.repository.AsteroidLocalRepositoryImpl
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -20,16 +20,20 @@ class ProfileViewModel(
     private val _uiState = MutableStateFlow(ProfileUiState(list = emptyList(), username = ""))
     val uiState: StateFlow<ProfileUiState> = _uiState
 
+    var showOnboarding = mutableStateOf(false)
+        private set
+
     init {
         fetchLocalAsteroids()
         observeUsername()
+        viewModelScope.launch {
+            showOnboarding.value = dataStoreRepository.getShowOnboarding()
+        }
     }
 
     private fun fetchLocalAsteroids() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
-
-            delay(1000) // pretend to fetch stuff
 
             localRepository.getSavedAsteroids().collect { list ->
                 _uiState.update { it.copy(isLoading = false, list = list) }
@@ -55,6 +59,13 @@ class ProfileViewModel(
             dataStoreRepository.getUsername().collect { username ->
                 _uiState.update { it.copy(username = username) }
             }
+        }
+    }
+
+    fun setShowOnboarding(value: Boolean) {
+        viewModelScope.launch {
+            dataStoreRepository.putShowOnboarding(value)
+            showOnboarding.value = value
         }
     }
 

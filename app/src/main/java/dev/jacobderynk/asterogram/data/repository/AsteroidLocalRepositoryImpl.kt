@@ -38,6 +38,7 @@ fun AsteroidResponse.toDbModel() =
         mass = this.mass,
         fall = this.fall,
         year = this.year,
+        `class` = this.recClass,
         likes = 0,
         isSaved = false,
         lat = this.recLat,

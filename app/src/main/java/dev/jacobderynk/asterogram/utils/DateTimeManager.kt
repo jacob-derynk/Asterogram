@@ -18,4 +18,17 @@ object DateTimeManager {
             datetime
         }
     }
+
+    fun getYearFromResponseDatetime(datetime: String): String {
+        return try {
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+            val outputFormat = SimpleDateFormat("yyyy", Locale.getDefault())
+
+            val date = inputFormat.parse(datetime) ?: ""
+            outputFormat.format(date)
+        } catch (e: Exception) {
+            Timber.e(e, "formatResponseDatetime exception")
+            datetime
+        }
+    }
 }

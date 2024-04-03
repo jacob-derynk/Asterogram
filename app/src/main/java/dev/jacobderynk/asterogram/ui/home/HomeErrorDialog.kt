@@ -48,6 +48,7 @@ fun HomeErrorDialog(
             TextButton(
                 onClick = {
                     onTryAgain.invoke()
+                    onDismiss.invoke()
                 }
             ) {
                 Text(stringResource(R.string.try_again))

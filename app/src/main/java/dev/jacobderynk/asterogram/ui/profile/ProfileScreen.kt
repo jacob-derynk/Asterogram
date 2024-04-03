@@ -1,15 +1,21 @@
 package dev.jacobderynk.asterogram.ui.profile
 
 import android.widget.Toast
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -33,6 +39,7 @@ fun ProfileScreen(
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var showDialog by remember { mutableStateOf(false) }
+    val showOnboarding by remember { mutableStateOf(viewModel.showOnboarding) }
 
     if (uiState.isLoading) {
         Box {
@@ -51,7 +58,9 @@ fun ProfileScreen(
     if (showDialog) {
         ChangeUsernameDialog(
             onDismiss = { showDialog = false },
-            onUsernameChange = viewModel::saveUsername
+            onUsernameChange = viewModel::saveUsername,
+            showOnboarding = showOnboarding.value,
+            onOnboardingChange = { viewModel.setShowOnboarding(!showOnboarding.value) },
         )
     }
 
@@ -61,7 +70,7 @@ fun ProfileScreen(
         postsNumber = uiState.list.size.toString(),
         onEditUsernameClick = {
             showDialog = true
-        }
+        },
     )
 }
 
@@ -69,16 +78,34 @@ fun ProfileScreen(
 fun ChangeUsernameDialog(
     onUsernameChange: (String) -> Unit,
     onDismiss: () -> Unit,
+    showOnboarding: Boolean,
+    onOnboardingChange: () -> Unit,
 ) {
     var selectedUsername by remember { mutableStateOf("") }
+    var checkedOnboarding by remember { mutableStateOf(showOnboarding) }
 
     AlertDialog(
         modifier = Modifier.padding(16.dp),
         title = {
-            Text(stringResource(R.string.choose_new_username))
+            Text(stringResource(R.string.settings))
         },
         text = {
             Column {
+                Row(
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Switch(
+                        checked = checkedOnboarding,
+                        onCheckedChange = {
+                            checkedOnboarding = !checkedOnboarding
+                            onOnboardingChange.invoke()
+                        }
+                    )
+                    Spacer(Modifier.width(4.dp))
+                    Text(text = stringResource(R.string.show_onboarding))
+                }
+                Spacer(Modifier.height(4.dp))
+                Text(stringResource(R.string.choose_new_username))
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
                     value = selectedUsername,

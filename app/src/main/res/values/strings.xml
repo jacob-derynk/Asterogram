@@ -29,4 +29,6 @@
     <string name="network_error_content">There has been a connection error. Please chech your internet.</string>
     <string name="generic_error_content">There has been an issue downloading posts. Please try again.</string>
     <string name="try_again">Try again</string>
+    <string name="show_onboarding">Show onboarding on next app start up</string>
+    <string name="settings">Settings</string>
 </resources>
