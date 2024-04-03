@@ -25,7 +25,7 @@ It's just a smol showcase app, so be nice to it :)
 ## Starting things up 🚀
 
 - **Android SDK** installed and defined as `sdk.dir` variable in `local.properties`.
-- **App token** set up `APP_TOKEN` variable inside your `local.properties`. You can obtain one by signing up on [data.nasa.gov](https://data.nasa.gov/) and then following a few steps described in [Generating App Tokens and API Keys](https://support.socrata.com/hc/en-us/articles/210138558-Generating-App-Tokens-and-API-Keys).
+- **App token**: set up `APP_TOKEN` variable inside your `local.properties`. You can obtain one by signing up on [data.nasa.gov](https://data.nasa.gov/) and then following a few steps described in [Generating App Tokens and API Keys](https://support.socrata.com/hc/en-us/articles/210138558-Generating-App-Tokens-and-API-Keys).
 
 You can then build the project from the terminal using `./gradlew build` or assemble debug APK `./gradlew :app:assembleDebug`. Signing config is not configured yet, so no release APK here :)
 
